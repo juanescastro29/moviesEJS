@@ -107,7 +107,7 @@
               <td><%= movie.gross %></td>
               <td><%= movie.time_stamp %></td>
               <td>
-                <input type="radio" value="true" id="check" />
+                <input type="checkbox" />
               </td>
             </tr>
             <%})%>
@@ -144,9 +144,8 @@
       for (let i = 0; i < rows.length; i++) {
         const titleCol = rows[i].getElementsByTagName("td")[0];
         const deleteMovie = rows[i].getElementsByTagName("td")[16];
-        const check = deleteMovie.getElementsByTagName("input")
-        if (check) {
-          console.log(1);
+        if (deleteMovie) {
+          moviesTable.deleteRow(i)
         }
       }
     }
