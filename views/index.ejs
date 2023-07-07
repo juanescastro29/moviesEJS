@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('./templates/header.ejs') %>
+  </head>
+  <body>
+    <div class="container">
+      <div class="container p-5">
+        <div class="row">
+          <div class="mb-3 col-8">
+            <label for="exampleFormControlInput1" class="form-label"
+              >Movie name</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="movieName"
+              placeholder="Movie name"
+              onkeyup="filterMovies()"
+            />
+          </div>
+        </div>
+        <form action="">
+          <div class="row">
+            <label for="exampleFormControlInput1" class="form-label"
+              >Release date</label
+            >
+            <div class="mb-3 col-4">
+              <input
+                type="text"
+                class="form-control"
+                id="releaseYear"
+                placeholder="Release year"
+              />
+            </div>
+            <div class="mb-3 col-6">
+              <button class="btn btn-primary">Apply filter</button>
+            </div>
+          </div>
+          <div class="row">
+            <label for="exampleFormControlInput1" class="form-label"
+              >Range of date</label
+            >
+            <div class="mb-3 col-4">
+              <input
+                type="text"
+                class="form-control"
+                id="initialDate"
+                placeholder="Initial date"
+              />
+            </div>
+            <div class="mb-3 col-4">
+              <input
+                type="text"
+                class="form-control"
+                id="endDate"
+                placeholder="End date"
+              />
+            </div>
+            <div class="mb-3 col-4">
+              <button class="btn btn-primary">Apply filter</button>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div class="table-responsive p-5">
+        <table class="table table-sm" id="moviesTable">
+          <thead class="text-center table-dark">
+            <tr>
+              <th scope="col">Movie id</th>
+              <th scope="col">Tittle</th>
+              <th scope="col">Phase</th>
+              <th scope="col">Category</th>
+              <th scope="col">Release year</th>
+              <th scope="col">Running time</th>
+              <th scope="col">Rating name</th>
+              <th scope="col">Disc format</th>
+              <th scope="col">Number disc</th>
+              <th scope="col">Viewing format</th>
+              <th scope="col">Aspect ratio</th>
+              <th scope="col">Status</th>
+              <th scope="col">Release date</th>
+              <th scope="col">Budget</th>
+              <th scope="col">Gross</th>
+              <th scope="col">Time stamp</th>
+              <th scope="col">Delete movie</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% movies.forEach( movie => { %>
+            <tr>
+              <td><%= movie.movie_id %></td>
+              <td><%= movie.title %></td>
+              <td><%= movie.phase %></td>
+              <td><%= movie.category_name %></td>
+              <td><%= movie.release_year %></td>
+              <td><%= movie.running_time %></td>
+              <td><%= movie.rating_name %></td>
+              <td><%= movie.disc_format_name %></td>
+              <td><%= movie.number_discs %></td>
+              <td><%= movie.viewing_format_name %></td>
+              <td><%= movie.aspect_ratio_name %></td>
+              <td><%= movie.status %></td>
+              <td><%= movie.release_date %></td>
+              <td><%= movie.budget %></td>
+              <td><%= movie.gross %></td>
+              <td><%= movie.time_stamp %></td>
+              <td>
+                <input type="radio" value="true" id="check" />
+              </td>
+            </tr>
+            <%})%>
+          </tbody>
+        </table>
+      </div>
+      <div class="container">
+        <button class="btn btn-danger m-3" onclick="deleteMovie()">
+          Delete selectets movies
+        </button>
+      </div>
+    </div>
+  </body>
+
+  <script>
+    function filterMovies() {
+      const movieName = document
+        .getElementById("movieName")
+        .value.toLowerCase();
+      const rows = moviesTable.getElementsByTagName("tr");
+
+      for (let i = 0; i < rows.length; i++) {
+        const titleCol = rows[i].getElementsByTagName("td")[1];
+        if (titleCol) {
+          const title = titleCol.textContent.toLowerCase();
+          const showRow = title.includes(movieName);
+          rows[i].style.display = showRow ? "" : "none";
+        }
+      }
+    }
+
+    function deleteMovie() {
+      const rows = moviesTable.getElementsByTagName("tr");
+      for (let i = 0; i < rows.length; i++) {
+        const titleCol = rows[i].getElementsByTagName("td")[0];
+        const deleteMovie = rows[i].getElementsByTagName("td")[16];
+        const check = deleteMovie.getElementsByTagName("input")
+        if (check) {
+          console.log(1);
+        }
+      }
+    }
+  </script>
+</html>
